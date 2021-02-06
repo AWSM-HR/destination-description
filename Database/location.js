@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { db } = require('./index.js');
 
-db();
+// db();
 
 mongoose.Promise = global.Promise;
 
