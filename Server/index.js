@@ -1,11 +1,15 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 // eslint-disable-next-line no-unused-vars
-const db = require('../Database/index.js');
+// const db = require('../Database/index.js');
 
-const Locations = require('../Database/location.js');
-const Restaurants = require('../Database/restaurant.js');
-const Attractions = require('../Database/attraction.js');
+// const Locations = require('../Database/location.js');
+// const Restaurants = require('../Database/restaurant.js');
+// const Attractions = require('../Database/attraction.js');
+
+const { findAllAttractions,
+  findOneAttraction,
+  createAttraction } = require('../Seeding/index.js');
 
 const app = express();
 
@@ -44,16 +48,37 @@ app.delete('/api/restaurant:id', (req, res) => {
 
 // ATTRACTION API
 app.get('/api/attraction', (req, res) => {
-  Attractions.find(req, res);
+  findAllAttractions((err, results) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(200).send(results)
+    }
+  };
 });
-app.post('/api/attraction', (req, res) => {
-  Attractions.create(req, res);
+app.get('/api/attraction/:id', (req, res) => {
+  findOneAttraction(req.params.id, (err, results) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(results);
+    }
+  });
 });
-app.put('/api/attraction:id', (req, res) => {
-  Attractions.update(req, res);
-});
-app.delete('/api/attraction:id', (req, res) => {
-  Attractions.delete(req, res);
-});
+// app.post('/api/attraction', (req, res) => {
+//   createAttraction((err, results) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     } else {
+//       res.status(200).send(results);
+//     }
+//   });
+// });
+// app.put('/api/attraction:id', (req, res) => {
+//   Attractions.update(req, res);
+// });
+// app.delete('/api/attraction:id', (req, res) => {
+//   Attractions.delete(req, res);
+// });
 
 module.exports = app;

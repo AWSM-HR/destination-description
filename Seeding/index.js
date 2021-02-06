@@ -1,6 +1,24 @@
+const { Pool } = require('pg');
 
-const findAll = (cb) => {
-  pool.query('SELECT * FROM attractions', (err, results) => {
+const pool = new Pool({
+  host: 'localhost',
+  user: 'evanglaser',
+  database: 'attractionsdb',
+  password: '',
+  port: 5432
+});
+
+pool.connect((err, client, release) => {
+  if (err) {
+    console.log('err connecting to postgres');
+  } else {
+    console.log('connected to postgres');
+  }
+})
+
+
+const findAllAttractions = (cb) => {
+  pool.query('SELECT * FROM attraction', (err, results) => {
     if (err) {
       cb(err, null);
     } else {
@@ -9,8 +27,18 @@ const findAll = (cb) => {
   })
 };
 
-const create = (entry, cb) => {
-  pool.query(`INSERT INTO attractions ${entry}`, (err, results) => {
+const findOneAttraction = (id, cb) => {
+  pool.query(`SELECT * FROM attraction WHERE id = ${id}`, (err, results) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, results);
+    }
+  })
+};
+
+const createAttraction = (entry, cb) => {
+  pool.query(`INSERT INTO attraction ${entry}`, (err, results) => {
     if (err) {
       cb(err, null);
     } else {
@@ -21,6 +49,7 @@ const create = (entry, cb) => {
 
 module.exports = {
   pool,
-  findAll,
-  create,
-}
+  findAllAttractions,
+  findOneAttraction,
+  createAttraction,
+};
