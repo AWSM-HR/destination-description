@@ -9,7 +9,9 @@ const bodyParser = require('body-parser');
 
 const { findAllAttractions,
   findOneAttraction,
-  createAttraction } = require('../Seeding/index.js');
+  createAttraction,
+  findAllLocations,
+  findOneLocation, findAllRestaurants, findOneRestaurant } = require('../Seeding/index.js');
 
 const app = express();
 
@@ -20,31 +22,61 @@ app.use(express.static(`${__dirname}/../client/dist`));
 
 // LOCATION API
 app.get('/api/location', (req, res) => {
-  Locations.find(req, res);
+  findAllLocations((err, results) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(200).send(results)
+    }
+  });
 });
-app.post('/api/location', (req, res) => {
-  Locations.create(req, res);
+app.get('/api/location/:id', (req, res) => {
+  findOneLocation(req.params.id, (err, results) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(results);
+    }
+  });
 });
-app.put('/api/location:id', (req, res) => {
-  Locations.update(req, res);
-});
-app.delete('/api/location:id', (req, res) => {
-  Locations.delete(req, res);
-});
+// app.post('/api/location', (req, res) => {
+//   Locations.create(req, res);
+// });
+// app.put('/api/location:id', (req, res) => {
+//   Locations.update(req, res);
+// });
+// app.delete('/api/location:id', (req, res) => {
+//   Locations.delete(req, res);
+// });
 
 // RESTAURANT API
 app.get('/api/restaurant', (req, res) => {
-  Restaurants.find(req, res);
+  findAllRestaurants((err, results) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.status(200).send(results)
+    }
+  });
 });
-app.post('/api/restaurant', (req, res) => {
-  Restaurants.create(req, res);
+app.get('/api/restaurant/:id', (req, res) => {
+  findOneRestaurant(req.params.id, (err, results) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(results);
+    }
+  });
 });
-app.put('/api/restaurant:id', (req, res) => {
-  Restaurants.update(req, res);
-});
-app.delete('/api/restaurant:id', (req, res) => {
-  Restaurants.delete(req, res);
-});
+// app.post('/api/restaurant', (req, res) => {
+//   Restaurants.create(req, res);
+// });
+// app.put('/api/restaurant:id', (req, res) => {
+//   Restaurants.update(req, res);
+// });
+// app.delete('/api/restaurant:id', (req, res) => {
+//   Restaurants.delete(req, res);
+// });
 
 // ATTRACTION API
 app.get('/api/attraction', (req, res) => {
@@ -54,7 +86,7 @@ app.get('/api/attraction', (req, res) => {
     } else {
       res.status(200).send(results)
     }
-  };
+  });
 });
 app.get('/api/attraction/:id', (req, res) => {
   findOneAttraction(req.params.id, (err, results) => {

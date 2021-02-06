@@ -47,9 +47,52 @@ const createAttraction = (entry, cb) => {
   });
 };
 
+const findAllLocations = (cb) => {
+  pool.query('SELECT * FROM location', (err, results) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, results);
+    }
+  })
+};
+
+const findOneLocation = (id, cb) => {
+  pool.query(`SELECT * FROM location WHERE id = ${id}`, (err, results) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, results);
+    }
+  })
+};
+
+const findAllRestaurants = (cb) => {
+  pool.query('SELECT * FROM restaurant', (err, results) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, results);
+    }
+  })
+};
+const findOneRestaurant = (id, cb) => {
+  pool.query(`SELECT * FROM restaurant WHERE id = ${id}`, (err, results) => {
+    if (err) {
+      cb(err, null);
+    } else {
+      cb(null, results);
+    }
+  })
+};
+
 module.exports = {
   pool,
   findAllAttractions,
   findOneAttraction,
   createAttraction,
+  findAllLocations,
+  findOneLocation,
+  findAllRestaurants,
+  findOneRestaurant
 };
