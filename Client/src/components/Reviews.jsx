@@ -22,7 +22,7 @@ const Reviews = ({ reviews }) => (
 );
 
 Reviews.propTypes = {
-  reviews: PropTypes.arrayOf(PropTypes.string).isRequired,
+  reviews: PropTypes.string.isRequired,
 };
 
 export default Reviews;

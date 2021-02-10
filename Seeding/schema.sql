@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS "location" (
   addressCity VARCHAR,
   addressCountry VARCHAR,
   addressZip VARCHAR,
+  reviews VARCHAR,
   website VARCHAR,
   phoneNum VARCHAR,
   email VARCHAR
