@@ -10,26 +10,26 @@ import { StyledImg } from '../componentStyles';
 const Restaurant = ({ restaurant }) => (
   <Grid container spacing={1}>
     <Grid item xs={5}>
-      <StyledImg variant="square" src={restaurant.imageUrl} alt="Tasty looking food" />
+      <StyledImg variant="square" src={restaurant.imageurl} alt="Tasty looking food" />
     </Grid>
     <Grid item xs={7}>
       {restaurant.name}
       <Rating
         style={{ color: 'rgb(52, 224, 161' }}
         name="customized-icons"
-        value={restaurant.ratings.avg}
+        value={restaurant.ratingsavg}
         precision={0.5}
         size="small"
         icon={<FiberManualRecordIcon />}
-        getLabelText={() => `${restaurant.ratings.total} reviews`}
+        getLabelText={() => `${restaurant.ratingstotal} reviews`}
       />
-      {`(${restaurant.ratings.total})`}
+      {`(${restaurant.ratingstotal})`}
       <br />
       <DirectionsWalk />
-      {restaurant.distanceFrom}
+      {restaurant.distancefrom}
       miles
       <br />
-      {restaurant.foodType}
+      {restaurant.foodtype}
       <br />
       <Rating
         style={{ color: 'rgb(52, 224, 161' }}
@@ -38,7 +38,7 @@ const Restaurant = ({ restaurant }) => (
         precision={0.5}
         size="small"
         icon={<AttachMoneyIcon />}
-        getLabelText={() => `${restaurant.ratings.total} reviews`}
+        getLabelText={() => `${restaurant.ratingstotal} reviews`}
       />
     </Grid>
   </Grid>

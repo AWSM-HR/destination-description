@@ -11,14 +11,14 @@ const Location = ({ location }) => (
     <h3>Contact</h3>
     <p>
       <MapMarker />
-      {location.address.city}
+      {location.addresscity}
       {' '}
-      {location.address.country}
+      {location.addresscountry}
     </p>
     <p>
-      {location.address.street}
+      {location.addressstreet}
       {' '}
-      {location.address.zip}
+      {location.addresszip}
     </p>
     <p>
       <ComputerIcon />
@@ -28,7 +28,7 @@ const Location = ({ location }) => (
     <p>
       <PhoneIcon />
       {' '}
-      {location.phoneNum}
+      {location.phonenum}
     </p>
     <p>
       <MailOutlineIcon />

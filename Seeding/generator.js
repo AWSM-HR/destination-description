@@ -38,10 +38,11 @@ const createLocation = (i) => {
   const addressCity = faker.address.city();
   const addressCountry = faker.address.country();
   const addressZip = faker.address.zipCode();
+  const reviews = faker.lorem.sentence();
   const website = faker.internet.url();
   const phoneNum = faker.phone.phoneNumber();
   const email = faker.internet.email();
-  return `${id}, "${name}", ${coordsLat}, ${coordsLong}, ${addressStreet}, ${addressCity}, "${addressCountry}", ${addressZip}, ${website}, ${phoneNum}, ${email}\n`;
+  return `${id}, "${name}", "${coordsLat}", "${coordsLong}", "${addressStreet}", "${addressCity}", "${addressCountry}", "${addressZip}", "${reviews}", ${website}, ${phoneNum}, ${email}\n`;
 };
 
 const createRestaurant = (i) => {
@@ -116,7 +117,7 @@ const startWritingRestaurants = (writeStream, encoding, done) => {
   writing();
 };
 
-locationStream.write('id, name, coordsLat, coordsLong, addressStreet, addressCity, addressCountry, addressZip, website, phoneNum, email\n');
+locationStream.write('id, name, coordsLat, coordsLong, addressStreet, addressCity, addressCountry, addressZip, reviews, website, phoneNum, email\n');
 startWritingLocations(locationStream, 'utf-8', () => locationStream.end());
 
 restaurantStream.write('id, name, ratingsAvg, ratingsTotal, imageUrl, distanceFrom, foodType, price\n');

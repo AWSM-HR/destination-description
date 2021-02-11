@@ -10,25 +10,25 @@ import { StyledImg } from '../componentStyles';
 const Attraction = ({ attraction }) => (
   <Grid container spacing={1}>
     <Grid item xs={5}>
-      <StyledImg variant="square" src={attraction.imageUrl} alt="A fun activity" />
+      <StyledImg variant="square" src={attraction.imageurl} alt="A fun activity" />
     </Grid>
     <Grid item xs={7}>
-      {attraction.basicDescription}
+      {attraction.basicdescription}
       {' '}
       <Rating
         style={{ color: 'rgb(52, 224, 161' }}
         name="customized-icons"
-        value={attraction.ratings.avg}
+        value={attraction.ratingsavg}
         precision={0.5}
         size="small"
         icon={<FiberManualRecordIcon />}
-        getLabelText={() => `${attraction.ratings.total} reviews`}
+        getLabelText={() => `${attraction.ratingstotal} reviews`}
       />
       {' '}
-      {`(${attraction.ratings.total})`}
+      {`(${attraction.ratingstotal})`}
       <br />
       <DirectionsWalk />
-      {attraction.distanceFrom}
+      {attraction.distancefrom}
       miles
       <br />
       {' $'}

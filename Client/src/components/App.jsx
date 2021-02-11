@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Axios from 'axios';
 import Rating from '@material-ui/lab/Rating';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
@@ -10,73 +10,77 @@ import Reviews from './Reviews';
 import Map from './Map';
 import NearbyInfo from './NearbyInfo';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      location: null,
-      restaurants: null,
-      attractions: null,
-      mainAttraction: null,
-    };
-    this.setState = this.setState.bind(this);
-  }
+const App = () => {
+  const [location, setLocation] = useState(null);
+  const [restaurants, setRestaurants] = useState(null);
+  const [attractions, setAttractions] = useState(null);
+  const [mainAttraction, setMainAttraction] = useState(null);
 
-  componentDidMount() {
-    this.getLocation();
-    this.getRestaurants();
-    this.getAttractions();
-  }
+  useEffect(() => {
+    getLocation();
+    getRestaurants();
+    getAttractions();
+  }, []);
 
-  getLocation() {
+  const getLocation = () => {
     Axios.get('http://localhost:3000/api/location')
     // Axios.get('/api/restaurant')
       .then((result) => {
-        const { data } = result;
-        this.setState({
-          location: data,
-        });
+        console.log('loc ', result.data.rows[0]);
+        const answer = result.data.rows[0];
+        // const { data } = result;
+        setLocation(answer);
       })
       .catch((err) => { console.log(err); });
-  }
+  };
 
-  getRestaurants() {
+  const getRestaurants = () => {
     Axios.get('http://localhost:3000/api/restaurant')
     // Axios.get('/api/restaurant')
       .then((result) => {
-        const { data } = result;
-        this.setState({
-          restaurants: data,
-        });
+        console.log('res ', result.data.rows[0]);
+        const answer = result.data.rows.slice(0, 5);
+        // const { data } = result;
+        setRestaurants(answer);
       })
       .catch((err) => { console.log(err); });
-  }
+  };
 
-  getAttractions() {
-    Axios.get('http://localhost:3000/api/attraction')
+  const getAttractions = (id) => {
+    id = 1234;
+    Axios.get(`http://localhost:3000/api/attraction/${id}`)
     // Axios.get('/api/attraction')
       .then((result) => {
-        this.setState({
-          attractions: result.data,
-        });
-      })
-      .then(() => {
-        const { attractions } = this.state;
-        this.setState({
-          mainAttraction: attractions[3],
-        });
-      })
-      .catch((err) => { console.log(err); });
-  }
+        console.log('attr ', result.data.rows[0]);
+          const answer = result.data.rows.slice(0, 10);
+        // const { data } = result;
+        setAttractions(answer);
+      });
+  };
+  // getAttractions() {
+  //   Axios.get('http://localhost:3000/api/attraction')
+  //   // Axios.get('/api/attraction')
+  //   .then((result) => {
+  //     console.log('attr ', result.data.rows[0]);
+  //    const answer = result.data.rows.slice(0, 10);
+  //     // const { data } = result;
+  //     this.setState({
+  //       attractions: answer,
+  //     });
+  //   })
+  //     .then(() => {
+  //       const { attractions } = this.state;
+  //       this.setState({
+  //         mainAttraction: attractions[3],
+  //       });
+  //     })
+  //     .catch((err) => { console.log(err); });
+  // }
 
-  render() {
-    const {
-      location, restaurants, mainAttraction, attractions,
-    } = this.state;
-    return (
-      <StyledRoot>
-        <StyledDoc>
-          { location
+  return (
+    <StyledRoot>
+      <StyledDoc>
+        { location
             && (
               <div>
                 <div className="reviews">
@@ -84,27 +88,27 @@ class App extends React.Component {
                     <StyledWhatTravellers item xs={3}>
                       What travelers are saying about
                       {' '}
-                      {location.Name}
+                      {location.name}
                     </StyledWhatTravellers>
                     <RatingBubbles item xs={1}>
                       <h1 style={{ float: 'right', top: '-50' }}>
-                        {location.ratings.avg}
+                        {location.ratingsavg}
                       </h1>
                     </RatingBubbles>
                     <RatingBubbles item xs={1}>
                       <Rating
                         style={{ color: 'rgb(52, 224, 161' }}
                         name="customized-icons"
-                        value={location.ratings.avg}
+                        value={location.ratingsavg}
                         precision={0.5}
                         size="small"
                         icon={<FiberManualRecordIcon />}
-                        getLabelText={() => `${location.ratings.total} reviews`}
+                        getLabelText={() => `${location.ratingstotal} reviews`}
                       />
                     </RatingBubbles>
                     <ReviewStayRight item xs={7}>
                       <h5 style={{ float: 'right' }}>
-                        {`Read all ${location.ratings.total} reviews`}
+                        {`Read all ${location.ratingstotal} reviews`}
                       </h5>
                     </ReviewStayRight>
                   </Grid>
@@ -115,12 +119,13 @@ class App extends React.Component {
                 </div>
                 <div className="map">
                   <Map
-                    coords={location.coords}
+                    coordsLat={location.coordslat}
+                    coordsLong={location.coordslong}
                   />
                 </div>
               </div>
             ) }
-          {location && restaurants && mainAttraction && attractions && (
+        {location && restaurants && mainAttraction && attractions && (
           <div className="information-panel">
             <NearbyInfo
               location={location}
@@ -129,11 +134,10 @@ class App extends React.Component {
               attractions={attractions}
             />
           </div>
-          ) }
-        </StyledDoc>
-      </StyledRoot>
-    );
-  }
-}
+        ) }
+      </StyledDoc>
+    </StyledRoot>
+  );
+};
 
 export default App;

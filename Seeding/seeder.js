@@ -6,12 +6,11 @@
 
 const { Pool } = require('pg');
 
-
 const pool = new Pool({
   host: 'localhost',
   user: 'evanglaser',
   database: 'attractionsdb',
-  password: '',
+  password: 'ubntu',
   port: 5432
 });
 
@@ -36,6 +35,7 @@ const createLocation = `CREATE TABLE IF NOT EXISTS location (
   addressCity VARCHAR,
   addressCountry VARCHAR,
   addressZip VARCHAR,
+  reviews VARCHAR,
   website VARCHAR,
   phoneNum VARCHAR,
   email VARCHAR
@@ -43,8 +43,8 @@ const createLocation = `CREATE TABLE IF NOT EXISTS location (
 
 const createAttraction = `CREATE TABLE IF NOT EXISTS attraction (
   id SERIAL PRIMARY KEY,
-  restaurantId INTEGER REFERENCES restaurant(id),
-  locationId INTEGER REFERENCES location(id),
+  restaurantId INTEGER,
+  locationId INTEGER,
   name VARCHAR,
   ratingsAvg VARCHAR,
   ratingsTotal VARCHAR,
@@ -58,9 +58,9 @@ const createAttraction = `CREATE TABLE IF NOT EXISTS attraction (
 const createIndex = `CREATE INDEX attraction_index ON attraction(attractionId)`;
 
 pool.connect((err, client, done) => {
-  client.query('DROP TABLE IF EXISTS attractions CASCADE')
-  .then(() => client.query('DROP TABLE IF EXISTS locations CASCADE'))
-  .then(() => client.query('DROP TABLE IF EXISTS restaurants CASCADE'))
+  client.query('DROP TABLE IF EXISTS attraction CASCADE')
+  .then(() => client.query('DROP TABLE IF EXISTS location CASCADE'))
+  .then(() => client.query('DROP TABLE IF EXISTS restaurant CASCADE'))
   .then(() => client.query(createRestaurant))
   .then(() => client.query(createLocation))
   .then(() => client.query(createAttraction))
@@ -68,4 +68,4 @@ pool.connect((err, client, done) => {
   .catch((error) => {
     console.log(err);
   });
-})
+});
