@@ -18,7 +18,7 @@ const Attraction = ({ attraction }) => (
       <Rating
         style={{ color: 'rgb(52, 224, 161' }}
         name="customized-icons"
-        value={attraction.ratingsavg}
+        value={Number(attraction.ratingsavg)}
         precision={0.5}
         size="small"
         icon={<FiberManualRecordIcon />}
@@ -43,10 +43,8 @@ Attraction.propTypes = {
     imageUrl: PropTypes.string,
     name: PropTypes.string,
     price: PropTypes.number,
-    ratings: PropTypes.shape({
-      avg: PropTypes.number,
-      total: PropTypes.number,
-    }),
+    ratingsavg: PropTypes.string,
+    ratingstotal: PropTypes.string,
     distanceFrom: PropTypes.string,
     basicDescription: PropTypes.string,
   }).isRequired,

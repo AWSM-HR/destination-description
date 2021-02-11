@@ -39,10 +39,12 @@ const createLocation = (i) => {
   const addressCountry = faker.address.country();
   const addressZip = faker.address.zipCode();
   const reviews = faker.lorem.sentence();
+  const ratingsAvg = randomizer(5).toString();
+  const ratingsTotal = randomizer(1000).toString();
   const website = faker.internet.url();
   const phoneNum = faker.phone.phoneNumber();
   const email = faker.internet.email();
-  return `${id}, "${name}", "${coordsLat}", "${coordsLong}", "${addressStreet}", "${addressCity}", "${addressCountry}", "${addressZip}", "${reviews}", ${website}, ${phoneNum}, ${email}\n`;
+  return `${id}, "${name}", "${coordsLat}", "${coordsLong}", "${addressStreet}", "${addressCity}", "${addressCountry}", "${addressZip}", "${reviews}", ${ratingsAvg}, ${ratingsTotal}, ${website}, ${phoneNum}, ${email}\n`;
 };
 
 const createRestaurant = (i) => {

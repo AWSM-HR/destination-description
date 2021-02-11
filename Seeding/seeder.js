@@ -7,10 +7,10 @@
 const { Pool } = require('pg');
 
 const pool = new Pool({
-  host: 'localhost',
-  user: 'evanglaser',
+  host: '18.222.209.193',
+  user: 'postgres',
   database: 'attractionsdb',
-  password: 'ubntu',
+  password: 'ubuntu',
   port: 5432
 });
 
@@ -36,6 +36,8 @@ const createLocation = `CREATE TABLE IF NOT EXISTS location (
   addressCountry VARCHAR,
   addressZip VARCHAR,
   reviews VARCHAR,
+  ratingsAvg VARCHAR,
+  ratingsTotal VARCHAR,
   website VARCHAR,
   phoneNum VARCHAR,
   email VARCHAR
