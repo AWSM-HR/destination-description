@@ -23,7 +23,7 @@ const App = () => {
   }, []);
 
   const getLocation = () => {
-    Axios.get('http://localhost:3000/api/location')
+    Axios.get('http://18.218.60.207:3000/api/location')
     // Axios.get('/api/restaurant')
       .then((result) => {
         const answer = result.data.rows[4];
@@ -34,11 +34,10 @@ const App = () => {
   };
 
   const getRestaurants = () => {
-    Axios.get('http://localhost:3000/api/restaurant')
+    Axios.get('http://18.218.60.207:3000/api/restaurant')
     // Axios.get('/api/restaurant')
       .then((result) => {
         const answer = result.data.rows.slice(0, 5);
-        console.log('res ', answer);
         // const { data } = result;
         setRestaurants(answer);
       })
@@ -47,7 +46,7 @@ const App = () => {
 
   const getAttractions = (id) => {
     id = 1234;
-    Axios.get(`http://localhost:3000/api/attraction/${id}`)
+    Axios.get(`http://18.218.60.207:3000/api/attraction/${id}`)
     // Axios.get('/api/attraction')
       .then((result) => {
         const answer = result.data;
@@ -55,7 +54,6 @@ const App = () => {
         // const { data } = result;
         setAttractions(answer);
         setMainAttraction(answer[2]);
-        console.log('attractions ', answer);
       });
   };
   // getAttractions() {

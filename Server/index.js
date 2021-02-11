@@ -121,7 +121,6 @@ app.get('/api/attraction/:id', (req, res) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      console.log('results are ', results.rows);
       attractions.push(results.rows[0]);
       id++
       findOneAttraction(id, (error, data) => {
