@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 
-app.use(express.static(`${__dirname}/../client/dist`));
+app.use(express.static(`${__dirname}/../Client/dist`));
 
 app.get('/loaderio-71dc4d773db8222a6a27cd3bdee438dc', (req, res) => {
   res.send('loaderio-71dc4d773db8222a6a27cd3bdee438dc');

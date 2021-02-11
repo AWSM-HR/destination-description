@@ -8,10 +8,10 @@ const MainAttraction = ({ mainAttraction }) => (
   <div>
     <h2>Get to know the area</h2>
     <div>
-      <StyledMainImg variant="square" src={mainAttraction.imageUrl} alt="A fantastic attraction" />
+      <StyledMainImg variant="square" src={mainAttraction.imageurl} alt="A fantastic attraction" />
     </div>
     <h4>
-      {mainAttraction.basicDescription}
+      {mainAttraction.basicdescription}
     </h4>
     <h3>
       {mainAttraction.name}
@@ -20,13 +20,13 @@ const MainAttraction = ({ mainAttraction }) => (
       <Rating
         style={{ color: 'rgb(52, 224, 161' }}
         name="customized-icons"
-        value={mainAttraction.ratings.avg}
+        value={mainAttraction.ratingsavg}
         precision={0.5}
         size="small"
         icon={<FiberManualRecordIcon />}
-        getLabelText={() => `${mainAttraction.ratings.total} reviews`}
+        getLabelText={() => `${mainAttraction.ratingstotal} reviews`}
       />
-      {`${mainAttraction.ratings.total} reviews`}
+      {`${mainAttraction.ratingstotal} reviews`}
     </div>
     <p>
       {mainAttraction.description}
@@ -45,15 +45,13 @@ const MainAttraction = ({ mainAttraction }) => (
 MainAttraction.propTypes = {
   mainAttraction: PropTypes.shape({
     description: PropTypes.string,
-    imageUrl: PropTypes.string,
+    imageurl: PropTypes.string,
     name: PropTypes.string,
     price: PropTypes.number,
-    ratings: PropTypes.shape({
-      avg: PropTypes.number,
-      total: PropTypes.number,
-    }),
-    distanceFrom: PropTypes.string,
-    basicDescription: PropTypes.string,
+    ratingsavg: PropTypes.string,
+    ratingstotal: PropTypes.string,
+    distancefrom: PropTypes.string,
+    basicdescription: PropTypes.string,
   }).isRequired,
 };
 
