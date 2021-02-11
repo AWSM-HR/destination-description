@@ -4,21 +4,19 @@ import PropTypes from 'prop-types';
 
 // import Key from '../../../googleApiKey';
 
-const Map = ({ coords }) => (
+const Map = ({ coordsLat, coordsLong }) => (
   <div className="google-map">
     <GoogleMap
       // bootstrapURLKeys={{ key: Key }}
-      center={[coords.lat, coords.long]}
+      center={[coordsLat, coordsLong]}
       zoom={9}
     />
   </div>
 );
 
 Map.propTypes = {
-  coords: PropTypes.shape({
-    lat: PropTypes.number,
-    long: PropTypes.number,
-  }).isRequired,
+  coordsLat: PropTypes.string.isRequired,
+  coordsLong: PropTypes.string.isRequired,
 };
 
 export default Map;

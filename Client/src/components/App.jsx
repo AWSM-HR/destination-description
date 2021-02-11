@@ -29,37 +29,44 @@ class App extends React.Component {
   }
 
   getLocation() {
-    Axios.get('http://localhost:3000/api/location')
+    Axios.get('http://18.218.60.207:3000/api/location')
     // Axios.get('/api/restaurant')
       .then((result) => {
-        const { data } = result;
+        console.log(result.data.rows[0]);
+       const answer = result.data.rows[0];
+        // const { data } = result;
         this.setState({
-          location: data,
+          location: answer,
         });
       })
       .catch((err) => { console.log(err); });
   }
 
   getRestaurants() {
-    Axios.get('http://localhost:3000/api/restaurant')
+    Axios.get('http://18.218.60.207:3000/api/restaurant')
     // Axios.get('/api/restaurant')
-      .then((result) => {
-        const { data } = result;
-        this.setState({
-          restaurants: data,
-        });
-      })
+    .then((result) => {
+      console.log(result.data.rows[0]);
+     const answer = result.data.rows.slice(0, 5);
+      // const { data } = result;
+      this.setState({
+        restaurants: answer,
+      });
+    })
       .catch((err) => { console.log(err); });
   }
 
   getAttractions() {
-    Axios.get('http://localhost:3000/api/attraction')
+    Axios.get('http://18.218.60.207:3000/api/attraction')
     // Axios.get('/api/attraction')
-      .then((result) => {
-        this.setState({
-          attractions: result.data,
-        });
-      })
+    .then((result) => {
+      console.log(result.data.rows[0]);
+     const answer = result.data.rows.slice(0, 10);
+      // const { data } = result;
+      this.setState({
+        attractions: answer,
+      });
+    })
       .then(() => {
         const { attractions } = this.state;
         this.setState({
@@ -88,23 +95,23 @@ class App extends React.Component {
                     </StyledWhatTravellers>
                     <RatingBubbles item xs={1}>
                       <h1 style={{ float: 'right', top: '-50' }}>
-                        {location.ratings.avg}
+                        {location.ratingsAvg}
                       </h1>
                     </RatingBubbles>
                     <RatingBubbles item xs={1}>
                       <Rating
                         style={{ color: 'rgb(52, 224, 161' }}
                         name="customized-icons"
-                        value={location.ratings.avg}
+                        value={location.ratingsAvg}
                         precision={0.5}
                         size="small"
                         icon={<FiberManualRecordIcon />}
-                        getLabelText={() => `${location.ratings.total} reviews`}
+                        getLabelText={() => `${location.ratingsTotal} reviews`}
                       />
                     </RatingBubbles>
                     <ReviewStayRight item xs={7}>
                       <h5 style={{ float: 'right' }}>
-                        {`Read all ${location.ratings.total} reviews`}
+                        {`Read all ${location.ratingsTotal} reviews`}
                       </h5>
                     </ReviewStayRight>
                   </Grid>
@@ -115,7 +122,8 @@ class App extends React.Component {
                 </div>
                 <div className="map">
                   <Map
-                    coords={location.coords}
+                    coordsLat={location.coordslat}
+                    coordsLong={location.coordslong}
                   />
                 </div>
               </div>

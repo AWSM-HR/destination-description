@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
+
 // eslint-disable-next-line no-unused-vars
 // const db = require('../Database/index.js');
 
@@ -17,8 +19,13 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
 
 app.use(express.static(`${__dirname}/../client/dist`));
+
+app.get('/loaderio-71dc4d773db8222a6a27cd3bdee438dc', (req, res) => {
+  res.send('loaderio-71dc4d773db8222a6a27cd3bdee438dc');
+});
 
 // LOCATION API
 app.get('/api/location', (req, res) => {
@@ -26,7 +33,7 @@ app.get('/api/location', (req, res) => {
     if (err) {
       res.status(400).send(err);
     } else {
-      res.status(200).send(results)
+      res.status(200).send(results);
     }
   });
 });
