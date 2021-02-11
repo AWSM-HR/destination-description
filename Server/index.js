@@ -23,6 +23,10 @@ app.use(cors());
 
 app.use(express.static(`${__dirname}/../client/dist`));
 
+app.get('/loaderio-71dc4d773db8222a6a27cd3bdee438dc', (req, res) => {
+  res.send('loaderio-71dc4d773db8222a6a27cd3bdee438dc');
+});
+
 // LOCATION API
 app.get('/api/location', (req, res) => {
   findAllLocations((err, results) => {

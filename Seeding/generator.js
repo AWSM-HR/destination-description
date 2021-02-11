@@ -42,7 +42,7 @@ const createLocation = (i) => {
   const website = faker.internet.url();
   const phoneNum = faker.phone.phoneNumber();
   const email = faker.internet.email();
-  return `${id}, "${name}", ${coordsLat}, ${coordsLong}, ${addressStreet}, ${addressCity}, "${addressCountry}", ${addressZip}, "${reviews}", ${website}, ${phoneNum}, ${email}\n`;
+  return `${id}, "${name}", "${coordsLat}", "${coordsLong}", "${addressStreet}", "${addressCity}", "${addressCountry}", "${addressZip}", "${reviews}", ${website}, ${phoneNum}, ${email}\n`;
 };
 
 const createRestaurant = (i) => {
