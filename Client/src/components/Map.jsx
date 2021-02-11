@@ -2,12 +2,12 @@ import React from 'react';
 import GoogleMap from 'google-map-react';
 import PropTypes from 'prop-types';
 
-// import Key from '../../../googleApiKey';
+import Key from '../../../googleApiKey';
 
 const Map = ({ coordsLat, coordsLong }) => (
   <div className="google-map">
     <GoogleMap
-      // bootstrapURLKeys={{ key: Key }}
+      bootstrapURLKeys={{ key: Key }}
       center={[coordsLat, coordsLong]}
       zoom={9}
     />
