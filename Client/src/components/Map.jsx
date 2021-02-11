@@ -3,20 +3,20 @@ import GoogleMap from 'google-map-react';
 import PropTypes from 'prop-types';
 
 import Key from '../../../googleApiKey';
-
-const Map = ({ coordsLat, coordsLong }) => (
+console.log('key ', Key);
+const Map = ({ coordslat, coordslong }) => (
   <div className="google-map">
     <GoogleMap
       bootstrapURLKeys={{ key: Key }}
-      center={[coordsLat, coordsLong]}
+      center={[coordslat, coordslong]}
       zoom={9}
     />
   </div>
 );
 
 Map.propTypes = {
-  coordsLat: PropTypes.string.isRequired,
-  coordsLong: PropTypes.string.isRequired,
+  coordslat: PropTypes.string.isRequired,
+  coordslong: PropTypes.string.isRequired,
 };
 
 export default Map;

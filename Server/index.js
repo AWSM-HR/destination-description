@@ -38,11 +38,30 @@ app.get('/api/location', (req, res) => {
   });
 });
 app.get('/api/location/:id', (req, res) => {
-  findOneLocation(req.params.id, (err, results) => {
+  let { id } = req.params;
+  const locations = [];
+  findOneLocation(id, (err, results) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      res.status(200).send(results);
+      locations.push(results);
+      id++
+      findOneLocation(id, (error, data) => {
+        if (err) {
+          res.status(501).send(err);
+        } else {
+          locations.push(data);
+          id++
+          findOneLocation(id, (issue, answer) => {
+            if (issue) {
+              res.status(502).send(err);
+            } else {
+              locations.push(answer);
+              res.status(200).send(locations);
+            }
+          })
+        }
+      })
     }
   });
 });
@@ -96,11 +115,31 @@ app.get('/api/attraction', (req, res) => {
   });
 });
 app.get('/api/attraction/:id', (req, res) => {
-  findOneAttraction(req.params.id, (err, results) => {
+  let { id } = req.params;
+  const attractions = [];
+  findOneAttraction(id, (err, results) => {
     if (err) {
       res.status(500).send(err);
     } else {
-      res.status(200).send(results);
+      console.log('results are ', results.rows);
+      attractions.push(results.rows[0]);
+      id++
+      findOneAttraction(id, (error, data) => {
+        if (err) {
+          res.status(501).send(err);
+        } else {
+          attractions.push(data.rows[0]);
+          id++
+          findOneAttraction(id, (issue, answer) => {
+            if (issue) {
+              res.status(502).send(err);
+            } else {
+              attractions.push(answer.rows[0]);
+              res.status(200).send(attractions);
+            }
+          })
+        }
+      })
     }
   });
 });

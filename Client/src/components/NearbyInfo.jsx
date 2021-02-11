@@ -45,7 +45,7 @@ NearbyInfo.propTypes = {
       avg: PropTypes.number,
       total: PropTypes.number,
     }),
-    reviews: PropTypes.arrayOf(PropTypes.string),
+    reviews: PropTypes.string,
     website: PropTypes.string,
     phoneNum: PropTypes.string,
     email: PropTypes.string,

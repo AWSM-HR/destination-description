@@ -26,8 +26,7 @@ const App = () => {
     Axios.get('http://localhost:3000/api/location')
     // Axios.get('/api/restaurant')
       .then((result) => {
-        console.log('loc ', result.data.rows[1]);
-        const answer = result.data.rows[1];
+        const answer = result.data.rows[4];
         // const { data } = result;
         setLocation(answer);
       })
@@ -38,8 +37,8 @@ const App = () => {
     Axios.get('http://localhost:3000/api/restaurant')
     // Axios.get('/api/restaurant')
       .then((result) => {
-        console.log('res ', result.data.rows[0]);
         const answer = result.data.rows.slice(0, 5);
+        console.log('res ', answer);
         // const { data } = result;
         setRestaurants(answer);
       })
@@ -51,10 +50,12 @@ const App = () => {
     Axios.get(`http://localhost:3000/api/attraction/${id}`)
     // Axios.get('/api/attraction')
       .then((result) => {
-        console.log('attr ', result.data.rows[0]);
-          const answer = result.data.rows.slice(0, 10);
+        const answer = result.data;
+          // console.log('attr ', answer);
         // const { data } = result;
         setAttractions(answer);
+        setMainAttraction(answer[2]);
+        console.log('attractions ', answer);
       });
   };
   // getAttractions() {
@@ -119,8 +120,8 @@ const App = () => {
                 </div>
                 <div className="map">
                   <Map
-                    coordsLat={location.coordslat}
-                    coordsLong={location.coordslong}
+                    coordslat={Number(location.coordslat)}
+                    coordslong={Number(location.coordslong)}
                   />
                 </div>
               </div>
