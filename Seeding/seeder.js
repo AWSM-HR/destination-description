@@ -36,6 +36,8 @@ const createLocation = `CREATE TABLE IF NOT EXISTS location (
   addressCountry VARCHAR,
   addressZip VARCHAR,
   reviews VARCHAR,
+  ratingsAvg VARCHAR,
+  ratingsTotal VARCHAR,
   website VARCHAR,
   phoneNum VARCHAR,
   email VARCHAR

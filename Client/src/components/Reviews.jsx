@@ -8,15 +8,15 @@ const Reviews = ({ reviews }) => (
     <Grid container spacing={1}>
       <Grid item xs={4}>
         <Review
-          review={reviews[0]}
+          review={reviews}
         />
       </Grid>
-      <Grid item xs={4}>
+      {/* <Grid item xs={4}>
         <Review review={reviews[1]} />
       </Grid>
       <Grid item xs={4}>
         <Review review={reviews[2]} />
-      </Grid>
+      </Grid> */}
     </Grid>
   </div>
 );

@@ -26,8 +26,8 @@ const App = () => {
     Axios.get('http://localhost:3000/api/location')
     // Axios.get('/api/restaurant')
       .then((result) => {
-        console.log('loc ', result.data.rows[0]);
-        const answer = result.data.rows[0];
+        console.log('loc ', result.data.rows[1]);
+        const answer = result.data.rows[1];
         // const { data } = result;
         setLocation(answer);
       })
